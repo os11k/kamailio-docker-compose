@@ -1,0 +1,17 @@
+version: '2'
+services:
+   kamailio:
+     hostname: kamailio
+     container_name: kamailio
+     restart: always
+     build: ./
+     logging:
+       options:
+         max-size: 50m
+     volumes:
+      - ./kamailio:/usr/local/etc/kamailio
+     tty: true
+     ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+
