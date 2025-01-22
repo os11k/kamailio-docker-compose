@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 RUN apt-get update && \
 apt-get -y install dnsutils git gcc g++ flex bison make pkg-config libpcre3-dev && \
