@@ -1,13 +1,13 @@
-FROM debian:bookworm
+FROM debian:trixie
 
 RUN apt-get update && \
-apt-get -y install dnsutils git gcc g++ flex bison make pkg-config libpcre3-dev && \
+apt-get -y install curl git gcc g++ flex bison make autoconf pkg-config libssl-dev libcurl4-openssl-dev libxml2-dev libpcre2-dev && \
 \
 #Here we are getting IP address of server and then we are setting it to advertise IP
-IP=$(echo $(dig +short myip.opendns.com @resolver1.opendns.com)) &&\
+IP=$(curl ifconfig.me) &&\
 echo "listen=eth0:5060 advertise $IP:5060" >> /kamailio.listen && \
 cd /usr/src/ && \
-git clone -b 5.2 https://github.com/kamailio/kamailio kamailio && \
+git clone -b 5.8 https://github.com/kamailio/kamailio kamailio && \
 cd kamailio && \
 #Here you can build your Kamailio on specific commit, it is allways good practice to do so
 #git checkout 02d70893718a96f552dc6426d016a0342e47247f && \ 
